@@ -1,0 +1,21 @@
+IT Keys and Commands to use:
+
+Installer Files are available in CFS Acc. -> S3 -> amiartifacts or can be directly downloaded from Install agents Tab in Qualys Portal.
+https://amiartifacts.s3.us-west-2.amazonaws.com/QualysCloudAgent.deb
+https://amiartifacts.s3.us-west-2.amazonaws.com/QualysCloudAgent.rpm
+https://amiartifacts.s3.us-west-2.amazonaws.com/QualysCloudAgent.exe 
+
+Windows:
+QualysCloudAgent.exe CustomerId={b212edaa-c1d5-7326-833d-6d0e77f7ab2a} ActivationId={0d1ac156-3632-41fd-b3a0-ee9aa0675e92} WebServiceUri=https://qagpublic.qg4.apps.qualys.com/CloudAgent/
+
+Ubuntu:
+sudo dpkg --install QualysCloudAgent.deb 
+sudo /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh ActivationId=0d1ac156-3632-41fd-b3a0-ee9aa0675e92 CustomerId=b212edaa-c1d5-7326-833d-6d0e77f7ab2a ServerUri=https://qagpublic.qg4.apps.qualys.com/CloudAgent/
+
+RHEL:
+sudo rpm -ivh QualysCloudAgent.rpm
+sudo /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh ActivationId=0d1ac156-3632-41fd-b3a0-ee9aa0675e92 CustomerId=b212edaa-c1d5-7326-833d-6d0e77f7ab2a ServerUri=https://qagpublic.qg4.apps.qualys.com/CloudAgent/
+
+Docker Censor:
+
+sudo docker run --cpus="0.5" --memory="4g" -d --restart on-failure -v /var/run/docker.sock:/var/run/docker.sock:ro -v /etc/qualys:/usr/local/qualys/qpa/data/conf/agent-data -v /usr/local/qualys/sensor/data:/usr/local/qualys/qpa/data -e ACTIVATIONID=0d1ac156-3632-41fd-b3a0-ee9aa0675e92 -e CUSTOMERID=b212edaa-c1d5-7326-833d-6d0e77f7ab2a -e POD_URL=https://cmsqagpublic.qg4.apps.qualys.com/ContainerSensor --net=host --name qualys-container-sensor qualys/qcs-sensor:latest --scan-thread-pool-size 1 --disableImageScan
