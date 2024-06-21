@@ -1,0 +1,179 @@
+app server:-
+In app server voulume mounted to /opt 
+free -h - to check the memory
+opt/MetricStream/SYSTEMi/systemi/bin - ./to check the services and log
+lscpu -to check the cpu details
+opt/MetricStream/SYSTEMi/systemi/config.client.xml- to check last changes 
+top- to check utilization
+du -csh -to check the space of an directory leve
+go to any app then services log then clear the log
+tomcat/kafka/logs>rm -rf*
+/kafka-du -csh>/logs> shift+log 
+docker ps -a --size - to check the space occupied by container inside host
+5.5 tb for all container
+oracle/oradata/ORCL/pdb/ - take an ss of the usage of the file and attahed in ticket
+====================
+Docker:
+login to container/opt/Metricstream/SYSTEMi/systemi
+cntr/du -csh *
+
+====================================================
+DB:- log in as "oracle/oracle"
+df -h - check the space of DB
+if DB is utililizing 100 % space then it will stop
+/home -data mounting
+top - to check the usage
+sqlplus sys as sysdba - then enter the passsword (password) to log in to db
+startup: - to start the db if its stop
+select username from all_users; - to see all the db users
+ALTER USER APLSTG IDENTIFIED BY APLSTG; - to reconfigure the password (here APLSTG is the DB and user name)(unbale to connect to db)inside sql db need to run this
+1521 port using for sql connectivity
+
+ALTER USER HR IDENTIFIED BY new_password; - to change the password
+SELECT username, account_status, expiry_date
+FROM dba_users
+WHERE username = 'your_username';
+
+lsnrctl status
+lsnrctl stop -to stop the services
+lsnrctl start-  to start (for conectivity issue) in home directory
+/app/oracle/admin/db12/adump>rm -rf* to clear the space
+/app/oracle/diag/lsnrctl/tnslnr also
+alert/ rm -rf log name
+db12 -to see all the 
+history - to check the prviously used cmd
+
+=========================================
+tmpfs      /dev/shm      tmpfs   defaults,size=8g   0   0
+mount -o remount /dev/shm
+show parameter memory
+shutdown immediate;
+show parameter sga_target;
+show parameter sga_max_size;
+
+==================================
+dd if=/dev/zero of=/swapfile bs=1024 count=12582912  (15*1024*1024 If this 15GB swapfile) 
+chmod 0600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+/swapfile	swap	swap	defaults	0	0
+
+========================================================
+kairos@vmidocsrv15:~$ docker tag 8313dd3d7e7a metricstream/images:19cse_20230105_cloud_golden_euphrates_hardened_it_05apr2024
+kairos@vmidocsrv15:~$ docker push metricstream/images:19cse_20230105_cloud_golden_euphrates_hardened_it_05apr2024
+=======================
+echo 2 > /proc/sys/vm/drop_caches
+=============
+
+rm -rf /etc/localtime
+ln -s /usr/share/zoneinfo/
+ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+
+==========================
+jamessrv:-
+netstat -lnpt | grep :25 /110
+dovecot -f 
+
+service dovecot status
+  995  service dovecot start
+  996  service sendmail status
+  997  service sendmail restart
+  998  service dovecot start
+service dovecot status
+==================
+mkswap /dev/nvme4n1
+swapon /dev/nvme4n1
+============
+mount -t nfs msi-nas1:/psaqanfs /Attachments
+ 
+/etc/fstab entry /dev/nvme3n1
+
+=============
+ sync; echo 1 > /proc/sys/vm/drop_caches
+ sudo mount -o remount /dev/shm
+tmpfs /dev/shm tmpfs defaults,size=6G 0 0
+
+
+===========
+chown -R ms:ms metricstream-installer-app
+chown -R oracle:oinstall METRICSTREAM.dmp
+=======================
+find /opt/MetricStream/SYSTEMi/KMS/KMP/log -type f -mtime +1 -delete
+find /opt/MetricStream/SYSTEMi/Systemi/log -type f -mtime +1 -delete
+find /opt/MetricStream/SYSTEMi/BAPI/log -type f -mtime +1 -delete
+find /opt/MetricStream/SYSTEMi/Tomcat/logs -type f -mtime +1 -delete
+find /opt/MetricStream/SYSTEMi/kafka/logs -type f -mtime +1 -delete
+find /opt/MetricStream/SYSTEMi/Apache/logs -type f -mtime +1 -delete
+=================
+find / -type f -name "*.zip" -mtime +14 -delete
+find / -type f -name "*.msar" -mtime +14 -delete
+find / -type f -name "*.log" -mtime +14 -delete
+find /tmp/* -daystart -mtime +7 -delete
+==========================================
+rm -rf /etc/localtime
+
+ln -s /usr/share/zoneinfo/
+
+ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+==========================================
+rsync -av /efs/jforg /backup
+=====================================
+apt-get install snapd
+  732  snap install amazon-ssm-agent --classic
+  733  systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
+  734  systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
+  735  systemctl status snap.amazon-ssm-agent.amazon-ssm-agent.service
+
+===========================================================
+ wget https://s3.ap-south-1.amazonaws.com/amazon-ssm-ap-south-1/latest/debian_amd64/amazon-ssm-agent.deb
+ sudo dpkg -i amazon-ssm-agent.deb
+ sudo systemctl start amazon-ssm-agent
+ sudo systemctl enable amazon-ssm-agent
+ sudo systemctl status amazon-ssm-agent
+sudo snap remove amazon-ssm-agent
+
+===================================================
+ apt-get install resolvconf -y
+ echo "nameserver 172.27.0.10" | sudo tee /etc/resolvconf/resolv.conf.d/head
+ echo "nameserver 172.27.0.9" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 172.27.0.60" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+ echo "search metricstream.com" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+==============================================
+apt-get install resolvconf -y
+echo "nameserver 172.27.0.9" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 172.27.0.10" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 172.27.0.60" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "search metricstream.com" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+echo "options edns0" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+
+ sudo resolvconf -u
+ sudo systemctl start resolvconf.service
+ sudo systemctl enable resolvconf.service
+ cat /etc/resolv.conf
+================================
+nameserver 172.27.0.9
+nameserver 172.27.0.10
+nameserver 172.27.0.60
+search metricstream.com
+options edns0
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+================================
+sudo umount /efs
+ 1997  vi /etc/fstab
+ 1998  sudo mkdir /efsstoreprod
+ 1999  mount -a
+ 2000  df -h | grep efsstoreprod
+ 2001  sudo umount /backup
+ 2002  vi /etc/fstab
+ 2003  sudo mkdir /efs
+ 2004  mount -a
+ 2005  df -h | grep efs
+==========================
+chown root:root /usr/bin/sudo
+chmod 4755 /usr/bin/sudo
+
+
+

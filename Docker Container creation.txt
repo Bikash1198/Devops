@@ -1,0 +1,46 @@
+Docker Container creation
+
+#docker login -u metricstream -p 'x47KC59NsMAY102019' - to log in to dockerhub
+
+#docker pull metricstream/images:cloud_golden_euphrates122-ga-bi-oct22-u1-19cse_20230105_hardened –   to pull the docker image from docker hub  
+
+#docker images – to see the images you pulled 
+
+#docker tag metricstream/images:cloud_golden_euphrates122-ga-bi-oct22-u1-19cse_20230105_hardened get.rnd.metricstream.com/19cse_20230105_hardened_itsm64991_nielsen:1 
+
+#docker rmi metricstream/images:euphrates122-ga-bi-oct22-u3-19cse_20230617 -remove the image 
+
+#cd/Data/dockerfile - edit the docker file
+
+#docker build -t get.rnd.metricstream.com/19cse_20230105_hardened_itsm64189_ikea:1 .  
+ (get….image name then in the lastjust add :1 .)
+
+=====================================================
+
+#cloud_golden_euphrates122-ga-bi-oct22-u1-19cse_20230105_hardened
+
+Euphrates-I Release Fall '22 Update 5 / cloud_golden_euphrates122-ga-bi-oct22-u1-19cse_20230105_hardened
+
+RI image without data for Euphrates Release Fall '22 Update on Oracle Database 19c Standard Edition Release 19.0.0.0.0 - Production Version 19.16.0.0.0 (19c CDB) 
+
+
+Now log in to tajmahal portal and navigate to “view active account” now search for the Instance owner name they have given in server request form
+and check the image 
+Here if the user should part of same data center as per the docker host you are creating if not then change it to same if no instance belongs to that user
+
+vmis3mgrsrv1  
+
+
+euphrates 122-ga-bi-oct22-u3-19cse_20230617
+
+euphrates 122-ga-bi-oct22-u3-19cse_20230617
+Euphrates-I Release Fall '22 Update 3
+
+19cse_20230105_cloud_golden_euphrates_hardened_it_05apr2024
+========================================================
+docker run -d -it -m 12g --name psdoctestsrv --shm-size 12g -p 44829:22 -p 44828:8085 -p 44827:1521 -p 44837:2484 -h instant-psdoctestsrv metricstream/images:euphrates122-ga-bi-oct22-u5-19cse_20240220 psdoctestsrv.metricstream.com
+
+=======================================
+docker commit psdocfranklinspsrv get.rnd.metricstream.com/psdocqafranklinsrv_itsm66240_franklin:1
+
+

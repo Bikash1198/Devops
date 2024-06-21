@@ -1,0 +1,94 @@
+Add new volume -Create an volume in console
+fdisk -l to check the volume you added
+now need to create the partition 
+fdisk /dev/nvme1n1  (disk drive path)
+n- to create an new partition
+p- primary
+enter(go with deafult of full disk partition)
+enter
+now the partition has been cretaed 
+w to save
+fdisk -l (to check the partition created or not)
+now need to create the physical volume
+pvcreate /dev/nvmeln1(disk path)
+now need to create volume group
+vgcreate vgdata /dev/nvme1n1p1  .path of the disk
+now need to create logical volume
+lvcreate -l100%FREE -n vgdata/lvdata (name) (then volume group name) (to create the logical volume)
+now need to apply an file system ans set an mount point
+mkfs.ext4 /dev/mapper/vgdata-lvdata (to apply the file system)  xfs_growfs /dev/mapper/vgdata-lvdata
+vgchange -ay vgdata (to active the volume group)
+now need to set the mount point
+fdisk -l (copy the disk drive & paste it to mount)
+mount /dev/mapper/vgdata-lvdata /opt(mount directory name)
+df -th to confirm
+cat /etc/mtab (to viewe & copy the mount path)
+vi /etc/fstab (/dev/mapper/vgdata-lvdate /opt    ext4    defaults      0   0
+mount -av (to confirm mounted or not)
+========================================
+yum install lvm2
+To extend existing volume using lvm
+fdissk -l (to confirm)
+Fdisk /dev/nvmeln1 (diskname)  (to create the parttition)
+n>p>..w 
+partprobe -s
+fdisk -l (to copy the partition)
+pvcreate /dev/nvmeln1p2  (to create the physical volume)
+vgextend vgdata /dev/nvmeln1p2  (to extend the volume group)                         
+vgs -to check the volume
+lvextend -l+100%FREE -n /dev/mapper/vgdata-lvdata  - path of the lgm (to extend the volume)
+xfs_growfs /dev/mapper/vgdata-lvdata (to resize)
+df -h to check
+lsblk
+
+
+fdisk /dev/nvme2n1
+  143  fdisk -l
+  144  partprobe -s
+  145  pvcreate /dev/nvme5n1p3
+  146  vgextend vgdata /dev/nvme5n1p3
+  147  vgs
+  148  lvextend -l+100%FREE -n /dev/mapper/vgdata-lvdata
+  149  resize2fs /dev/mapper/vgdata-lvdata 
+===========================
+
+vgremove vgdata
+
+pvremove /dev/nvme1n1p1
+
+pvcreate /dev/nvme1n1
+
+vgcreate vgdata /dev/nvme1n1p1
+
+mkfs.ext4 /dev/mapper/vgdata-lvdata
+
+lvcreate -l100%FREE -n vgdata/lvdata
+
+/opt    ext4    defaults        0       0
+
+========================
+mkswap /dev/nvme2n1
+swapon /dev/nvme2n1
+ 
+/etc/fstab entry /dev/nvme3n1
+
+/dev/nvme2n1    /swapfile       swap    defaults        0       0
+
+blkid
+====================
+yum install lvm2
+
+pvcreate /dev/nvme1n1p1
+vgcreate vgdata /dev/nvme1n1p1
+lvcreate -l100%FREE -n vgdata/lvdata
+mkfs.ext4 /dev/mapper/vgdata-lvdata
+vgchange -ay vgdata
+mount /dev/mapper/vgdata-lvdata /opt(mount directory name)
+
+=============
+
+*                soft    nofile          65536
+
+*                hard    nofile          65536
+
+vi /etc/security/limits.conf

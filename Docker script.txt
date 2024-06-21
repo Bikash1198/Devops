@@ -1,0 +1,17 @@
+
+kairos@instances2:/root$ docker-machine create --engine-opt tlsverify=false --driver generic --generic-ip-address 10.81.11.227 --generic-ssh-user "kairos" --generic-ssh-key "/home/kairos/.ssh/id_rsa" --engine-storage-driver aufs --engine-label dc=AWSBU3 --engine-label geo=IN --swarm BU3EstGuntnw
+
+Running pre-create checks...
+
+Creating machine...
+
+(BU3EstGuntnw) Importing SSH key...
+
+Waiting for machine to be running, this may take a few minutes...
+
+Error creating machine: Error waiting for machine to be running: Maximum number of retries (60) exceeded
+
+You have new mail in /var/mail/kairos
+
+kairos@instances2:/root$
+

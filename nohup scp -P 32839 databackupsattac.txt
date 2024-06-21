@@ -1,0 +1,33 @@
+nohup scp -P 32839 /data/backups/attachments.tar ms@10.101.1.27:/opt/MetricStream/Backup
+
+Docker Container creation
+
+#docker login -u metricstream -p 'x47KC59NsMAY102019' - to log in to dockerhub
+
+#docker pull metricstream/images:danube22-ga-bi-mar22-u2-19cse_20220818 –   to pull the docker image from docker hub  
+
+ 
+
+#docker images – to see the images you pulled 
+
+#docker tag metricstream/images:danube22-ga-bi-mar22-u2-19cse_20220818 get.rnd.metricstream.com/19cse_20220818_itsm65035_canadalife:1 
+
+#docker rmi metricstream/images:danube22-ga-bi-mar22-u2-19cse_20220818 -remove the image 
+
+#cd/Data/dockerfile - edit the docker file
+
+#docker build -t get.rnd.metricstream.com/19cse_20220818_itsm65035_canadalife:1 .  
+ (get….image name then in the lastjust add :1 .)
+
+/dev/sdb
+
+ sqlplus /nolog
+
+vi /home/oracle/db/network/admin/listener.ora
+ sqlplus / as SYSDBA
+
+/opt/u01/app/oracle/product/19.3.0/dbhome_1/network/admin/listener.ora
+
+vi /etc/hosts/replace the IP
+
+
