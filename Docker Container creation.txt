@@ -28,7 +28,7 @@ Now log in to tajmahal portal and navigate to “view active account” now sear
 and check the image 
 Here if the user should part of same data center as per the docker host you are creating if not then change it to same if no instance belongs to that user
 
-vmis3mgrsrv1  
+
 
 
 euphrates 122-ga-bi-oct22-u3-19cse_20230617
